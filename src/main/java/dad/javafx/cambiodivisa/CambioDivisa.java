@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -71,6 +73,25 @@ public class CambioDivisa extends Application {
 
 	private void onCambiarButtonAction(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		if(origenText.getText().equals("")) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("ERROR");
+			alert.setContentText("No has introducido nada");
+
+			alert.showAndWait();
+		}
+		
+		if (origenText.getText().matches("^[a-zA-Z]+$")) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("ERROR");
+			alert.setContentText("Has introducido una letra, pon un número");
+
+			alert.showAndWait();
+		}
+		
 		Double cantidad1 = Double.parseDouble(origenText.getText());
 		Divisa divisa1 = origenCombo.getSelectionModel().getSelectedItem();
 		Divisa divisa2 = destinoCombo.getSelectionModel().getSelectedItem();
